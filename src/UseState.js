@@ -7,6 +7,7 @@ function UseState({ name }) {
     useEffect(() => {
         console.log("Empezando el efecto")
 
+        // Si es true, se ejecuta, comienza en false, por eso no se ejecuta al iniciar.
         if (!!loading) {
             setTimeout(() => {
                 console.log("Haciendo la validación")
