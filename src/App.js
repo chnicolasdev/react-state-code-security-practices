@@ -1,7 +1,6 @@
 import React from 'react';
 import { UseState } from './UseState.js';
 import { ClassState } from './ClassState.js';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
