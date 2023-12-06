@@ -12,7 +12,7 @@ class ClassState extends React.Component{
 
         this.state = {
             error: false,
-            loading: true,
+            loading: false,
         }
     }
 
