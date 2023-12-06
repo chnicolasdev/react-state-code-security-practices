@@ -1,5 +1,8 @@
 import React from 'react';
 import { Loading } from './Loading';
+
+const SECURITY_CODE = 'paradigma';
+
 class ClassState extends React.Component{
 
     constructor(props) {
@@ -11,6 +14,7 @@ class ClassState extends React.Component{
         super(props);
 
         this.state = {
+            value: '',
             error: false,
             loading: false,
         }
@@ -36,6 +40,11 @@ class ClassState extends React.Component{
                 console.log("Haciendo la validación")
 
                 this.setState({ loading: !this.state.loading })
+                if (this.state.value === SECURITY_CODE) {
+                    this.setState({ error: false, loading: false });
+                } else {
+                    this.setState({ error: true, loading: false });
+                }
 
                 console.log("Terminando la validación")
             }, 3000);
@@ -43,13 +52,15 @@ class ClassState extends React.Component{
     }
 
     render() {
+
+        // const { value, error, loading } = this.state;
         // this.props, así llegan las props a las clases
         return (
             <div>
                 <h2>Eliminar { this.props.name }</h2>
                 <p>Por favor, escribe el código de seguridad</p>
 
-                {this.state.error && (
+                {(this.state.error && !this.state.loading) && (
                     <p>Error: el código es incorrecto</p>
                 )}
 
@@ -57,7 +68,13 @@ class ClassState extends React.Component{
                     <Loading />
                 )}
 
-                <input type="text" placeholder='Código de seguridad' />
+                <input
+                    placeholder='Código de seguridad'
+                    value={this.state.value}
+                    onChange={( event ) => {
+                        this.setState({ value: event.target.value });
+                    }}
+                />
                 <button
                     // setState, viene de React.Component, indicando cual es el estado que queremos actualizar
                     // onClick={() => this.setState(prevState => ({ error: !prevState.error }))}
